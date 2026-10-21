@@ -1,18 +1,17 @@
 /* Vector Humanities: light by default, dark via prefers-color-scheme or html[data-theme="dark"]. */
 
 :root {
-  --bg: #f8f5ee;
+  --bg: #f6f2e9;
   --surface: #fffdf8;
-  --surface-alt: #f0ebe0;
-  --ink: #16181d;
-  --muted: #5a5d68;
-  --blue: #0a1f44;
-  --blue-hover: #2a4a7f;
-  --sand: #a8854d;
-  --red: #a8442c;
-  --rule: #e3ddd0;
-  --shadow: 0 1px 2px rgba(22, 24, 29, .04), 0 8px 28px rgba(22, 24, 29, .06);
-  --field: 22, 24, 29;
+  --surface-alt: #efe7d8;
+  --ink: #141518;
+  --muted: #5b5d66;
+  --blue: #1a1aff;
+  --blue-hover: #1010c0;
+  --sand: #8a5a2f;
+  --red: #e8452a;
+  --rule: #e2d9c8;
+  --shadow: 0 1px 2px rgba(20, 21, 24, .04), 0 8px 28px rgba(20, 21, 24, .06);
   --serif: "Source Serif 4", Georgia, "Iowan Old Style", serif;
   --display: "Cormorant Garamond", "Iowan Old Style", Georgia, serif;
   --mono: "IBM Plex Mono", "SF Mono", Menlo, Consolas, monospace;
@@ -22,35 +21,33 @@
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #0b0e15;
-    --surface: #121722;
-    --surface-alt: #1a2030;
+    --bg: #0c0e1c;
+    --surface: #141830;
+    --surface-alt: #1b2040;
     --ink: #f3f1e8;
-    --muted: #9a9584;
-    --blue: #7fa0d6;
-    --blue-hover: #a3bde6;
-    --sand: #c9a456;
-    --red: #d0775f;
-    --rule: #262c3a;
+    --muted: #9b9aa8;
+    --blue: #8a90ff;
+    --blue-hover: #aeb2ff;
+    --sand: #d2a26c;
+    --red: #ff6a45;
+    --rule: #262b48;
     --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 10px 30px rgba(0, 0, 0, .35);
-    --field: 243, 241, 232;
     color-scheme: dark;
   }
 }
 
 :root[data-theme="dark"] {
-  --bg: #0b0e15;
-  --surface: #121722;
-  --surface-alt: #1a2030;
+  --bg: #0c0e1c;
+  --surface: #141830;
+  --surface-alt: #1b2040;
   --ink: #f3f1e8;
-  --muted: #9a9584;
-  --blue: #7fa0d6;
-  --blue-hover: #a3bde6;
-  --sand: #c9a456;
-  --red: #d0775f;
-  --rule: #262c3a;
+  --muted: #9b9aa8;
+  --blue: #8a90ff;
+  --blue-hover: #aeb2ff;
+  --sand: #d2a26c;
+  --red: #ff6a45;
+  --rule: #262b48;
   --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 10px 30px rgba(0, 0, 0, .35);
-  --field: 243, 241, 232;
   color-scheme: dark;
 }
 
@@ -85,7 +82,6 @@ a:hover { color: var(--blue-hover); text-decoration-color: currentColor; }
 }
 .site-header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 64px; }
 .brand { display: flex; align-items: center; gap: 10px; color: var(--ink); text-decoration: none; }
-.brand img { width: 30px; height: 36px; }
 .brand span { font-family: var(--display); font-weight: 600; font-size: 1.15rem; letter-spacing: .16em; text-transform: uppercase; }
 .site-nav { display: flex; align-items: center; gap: 22px; font-size: .92rem; }
 .site-nav a { color: var(--muted); text-decoration: none; }
@@ -102,20 +98,25 @@ a:hover { color: var(--blue-hover); text-decoration-color: currentColor; }
 
 /* Hero */
 
-.hero { position: relative; min-height: min(86vh, 760px); display: flex; align-items: center; overflow: hidden; border-bottom: 1px solid var(--rule); }
-#field { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.hero {
+  position: relative; min-height: min(88vh, 780px); display: flex; align-items: center; overflow: hidden;
+  border-bottom: 1px solid var(--rule); background: #e9c891;
+  /* the intarsia is a picture in wood: its text keeps the same colours in both themes */
+  --h-ink: #141518; --h-muted: #3b2412; --h-label: #5e3519; --h-blue: #1a1aff;
+}
+#scene { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 .hero::after {
   content: ""; position: absolute; inset: 0; pointer-events: none;
-  background: linear-gradient(90deg, var(--bg) 0%, color-mix(in srgb, var(--bg) 70%, transparent) 38%, transparent 70%);
+  background: linear-gradient(90deg, rgba(233, 200, 145, .78) 0%, rgba(233, 200, 145, .45) 34%, rgba(233, 200, 145, 0) 58%);
 }
-.hero .wrap { position: relative; z-index: 1; width: 100%; padding-top: 72px; padding-bottom: 72px; }
-.eyebrow { font-family: var(--mono); font-size: .74rem; letter-spacing: .2em; text-transform: uppercase; color: var(--sand); margin: 0 0 18px; }
+.hero .wrap { position: relative; z-index: 1; width: 100%; padding-top: 40px; padding-bottom: 150px; }
+.eyebrow { font-family: var(--mono); font-size: .74rem; letter-spacing: .2em; text-transform: uppercase; color: var(--h-label); margin: 0 0 18px; }
 .hero h1 {
   font-family: var(--display); font-weight: 500; font-size: clamp(3rem, 8.4vw, 6.6rem);
-  line-height: .95; letter-spacing: -.005em; margin: 0 0 24px;
+  line-height: .95; letter-spacing: -.005em; margin: 0 0 24px; color: var(--h-ink);
 }
-.hero h1 em { font-style: italic; color: var(--blue); }
-.hero .lede { max-width: 33rem; font-size: 1.16rem; color: var(--muted); margin: 0 0 32px; }
+.hero h1 em { font-style: italic; color: var(--h-blue); }
+.hero .lede { max-width: 31rem; font-size: 1.16rem; color: var(--h-muted); margin: 0 0 32px; }
 .cta { display: flex; flex-wrap: wrap; gap: 12px; }
 .btn {
   display: inline-flex; align-items: center; gap: 8px; padding: 11px 20px; border-radius: 999px;
@@ -123,9 +124,14 @@ a:hover { color: var(--blue-hover); text-decoration-color: currentColor; }
   border: 1px solid var(--ink); color: var(--ink); background: transparent; transition: all .2s ease;
 }
 .btn:hover { background: var(--ink); color: var(--bg); }
-.btn.primary { background: var(--blue); border-color: var(--blue); color: var(--bg); }
-.btn.primary:hover { background: var(--blue-hover); border-color: var(--blue-hover); color: var(--bg); }
-.hero-note { position: absolute; right: 32px; bottom: 20px; z-index: 1; font-family: var(--mono); font-size: .68rem; letter-spacing: .08em; color: var(--muted); opacity: .8; }
+.btn.primary { background: var(--blue); border-color: var(--blue); color: #fff; }
+.btn.primary:hover { background: var(--blue-hover); border-color: var(--blue-hover); color: #fff; }
+.hero .btn { border-color: var(--h-ink); color: var(--h-ink); }
+.hero .btn:hover { background: var(--h-ink); color: #e9c891; }
+.hero .btn.primary { background: var(--h-blue); border-color: var(--h-blue); color: #fff; }
+.brand-mark { display: block; flex-shrink: 0; }
+.hero-copy { max-width: 560px; pointer-events: auto; }
+.hero .wrap { pointer-events: none; }   /* drags on the empty wall reach the scene */
 
 /* Sections */
 
@@ -192,7 +198,7 @@ h3 { font-family: var(--display); font-weight: 600; font-size: 1.5rem; line-heig
 
 /* Related */
 
-.related { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.related { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
 .related a { display: block; padding: 26px; border: 1px solid var(--rule); border-radius: 14px; text-decoration: none; color: var(--ink); background: var(--surface); transition: border-color .2s ease; }
 .related a:hover { border-color: var(--blue); color: var(--ink); }
 .related b { font-family: var(--display); font-size: 1.4rem; font-weight: 600; display: block; margin-bottom: 4px; }
@@ -225,17 +231,18 @@ h3 { font-family: var(--display); font-weight: 600; font-size: 1.5rem; line-heig
   .methods, .conventions, .related { grid-template-columns: 1fr; }
 }
 
+/* stacked: the solid hangs above the copy; set by intarsia.js when there is no room beside it */
+.hero.is-stacked { min-height: 860px; align-items: flex-start; }
+.hero.is-stacked::after { background: linear-gradient(180deg, rgba(233, 200, 145, 0) 32%, rgba(233, 200, 145, .55) 46%, rgba(233, 200, 145, 0) 82%); }
+.hero.is-stacked .wrap { padding-bottom: 40px; }
+
 @media (max-width: 600px) {
   body { font-size: 17px; }
   .wrap { padding: 0 16px; }
   .site-nav { gap: 14px; }
   .site-nav .hide-sm { display: none; }
   .brand span { font-size: .95rem; letter-spacing: .1em; white-space: nowrap; }
-  .hero-note { display: none; }
   section { padding: 72px 0; }
-  .hero { min-height: 640px; }
-  .hero::after { background: linear-gradient(180deg, color-mix(in srgb, var(--bg) 55%, transparent) 0%, color-mix(in srgb, var(--bg) 85%, transparent) 100%); }
-  .hero-note { right: 16px; }
   .project .cover, .project .body { padding: 28px 22px; }
   .project .jp { right: 20px; top: 26px; }
   .method { padding: 22px; }
