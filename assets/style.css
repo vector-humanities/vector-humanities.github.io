@@ -161,11 +161,6 @@ h3 { font-family: var(--display); font-weight: 600; font-size: 1.5rem; line-heig
 .project .cover h3 { font-size: 1.8rem; line-height: 1.1; margin-bottom: 10px; }
 .project .cover .by { font-style: italic; color: var(--muted); margin: 0; }
 .project + .project { margin-top: 24px; }
-/* a figure from the book printed into the cover's paper, the title set over it */
-.project .cover .figure { position: absolute; right: 24px; bottom: 22px; width: 175px; max-width: 34%; height: auto; mix-blend-mode: multiply; opacity: .78; pointer-events: none; }
-.project .cover .jp, .project .cover .cover-text { z-index: 1; }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .project .cover .figure { filter: invert(1); mix-blend-mode: screen; opacity: .55; } }
-:root[data-theme="dark"] .project .cover .figure { filter: invert(1); mix-blend-mode: screen; opacity: .55; }
 .project .mark { position: absolute; right: 18px; top: 10px; width: 190px; height: 190px; }
 .project .mark img { display: block; width: 100%; height: 100%; }
 /* a photograph filling the cover, darkened at the foot so the title reads */
@@ -258,7 +253,6 @@ h3 { font-family: var(--display); font-weight: 600; font-size: 1.5rem; line-heig
   .project .cover, .project .body { padding: 28px 22px; }
   .project .jp { right: 20px; top: 26px; }
   .project .mark { right: 10px; top: 8px; width: 130px; height: 130px; }
-  .project .cover .figure { width: 34%; max-width: 260px; }
   .project .cover.photo { min-height: 300px; }
   .method { padding: 22px; }
 }
