@@ -161,6 +161,11 @@ h3 { font-family: var(--display); font-weight: 600; font-size: 1.5rem; line-heig
 .project .cover h3 { font-size: 1.8rem; line-height: 1.1; margin-bottom: 10px; }
 .project .cover .by { font-style: italic; color: var(--muted); margin: 0; }
 .project + .project { margin-top: 24px; }
+/* a figure from the book printed into the cover's paper, the title set over it */
+.project .cover .figure { position: absolute; left: 15%; top: 11%; width: 64%; max-width: 330px; height: auto; mix-blend-mode: multiply; opacity: .78; pointer-events: none; }
+.project .cover .jp, .project .cover .cover-text { z-index: 1; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .project .cover .figure { filter: invert(1); mix-blend-mode: screen; opacity: .55; } }
+:root[data-theme="dark"] .project .cover .figure { filter: invert(1); mix-blend-mode: screen; opacity: .55; }
 .project .mark { position: absolute; right: 18px; top: 10px; width: 190px; height: 190px; }
 .project .mark img { display: block; width: 100%; height: 100%; }
 /* a photograph filling the cover, darkened at the foot so the title reads */
@@ -171,8 +176,11 @@ h3 { font-family: var(--display); font-weight: 600; font-size: 1.5rem; line-heig
 .project .cover.photo h3 { color: #fff; }
 .project .cover.photo .by { color: rgba(255, 255, 255, .82); }
 .project .cover.photo .tag { color: #fff; border-color: rgba(255, 255, 255, .7); background: rgba(4, 6, 11, .35); }
-.project .cover.photo .credit { position: absolute; right: 14px; bottom: 10px; margin: 0; z-index: 2; font-family: var(--mono); font-size: .6rem; letter-spacing: .04em; color: rgba(255, 255, 255, .6); }
-.project .cover.photo .credit a { color: rgba(255, 255, 255, .75); text-decoration-color: rgba(255, 255, 255, .35); }
+.project .cover.photo.paper { background-position: 50% 6%; color: #1c1712; }
+.project .cover.photo.paper::before { background: linear-gradient(180deg, rgba(243, 236, 222, 0) 38%, rgba(243, 236, 222, .9) 78%, rgba(243, 236, 222, .97) 100%); }
+.project .cover.photo.paper h3 { color: #1c1712; }
+.project .cover.photo.paper .by { color: #4a3f33; }
+.project .cover.photo.paper .tag { color: var(--red); border-color: var(--red); background: rgba(243, 236, 222, .85); }
 .on-dark { display: none !important; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .on-light { display: none !important; } :root:not([data-theme="light"]) .on-dark { display: block !important; } }
 :root[data-theme="dark"] .on-light { display: none !important; }
