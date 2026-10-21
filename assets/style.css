@@ -146,18 +146,6 @@ h3 { font-family: var(--display); font-weight: 600; font-size: 1.5rem; line-heig
 .prose p { margin: 0 0 1.1em; }
 .indent { margin-left: 212px; }
 
-/* Lineage diagram */
-
-.lineage { display: grid; grid-template-columns: 1fr 48px 1fr 48px 1fr; align-items: stretch; margin-top: 56px; }
-.node { background: var(--surface); border: 1px solid var(--rule); border-radius: 14px; padding: 24px; box-shadow: var(--shadow); }
-.node .k { font-family: var(--mono); font-size: .7rem; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
-.node h3 { font-size: 1.35rem; }
-.node p { margin: 0; font-size: .95rem; color: var(--muted); }
-.node.here { border-color: var(--red); box-shadow: 0 0 0 3px color-mix(in srgb, var(--red) 14%, transparent), var(--shadow); }
-.node.here .k { color: var(--red); }
-.arrow { display: grid; place-items: center; color: var(--sand); }
-.arrow svg { width: 40px; height: 16px; }
-
 /* Project card */
 
 .project {
@@ -231,9 +219,6 @@ h3 { font-family: var(--display); font-weight: 600; font-size: 1.5rem; line-heig
   .section-head { grid-template-columns: 1fr; gap: 10px; }
   .section-head .num { padding-top: 0; }
   .indent { margin-left: 0; }
-  .lineage { grid-template-columns: 1fr; gap: 0; }
-  .arrow { height: 40px; }
-  .arrow svg { transform: rotate(90deg); }
   .project { grid-template-columns: 1fr; }
   .stats { grid-template-columns: repeat(2, 1fr); }
   .project .cover { border-right: none; border-bottom: 1px solid var(--rule); min-height: 300px; }
