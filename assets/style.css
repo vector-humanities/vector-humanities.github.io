@@ -104,7 +104,8 @@ a:hover { color: var(--blue-hover); text-decoration-color: currentColor; }
   /* the intarsia is a picture in wood: its text keeps the same colours in both themes */
   --h-ink: #141518; --h-muted: #3b2412; --h-label: #5e3519; --h-blue: #1a1aff;
 }
-#scene { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+#scene, #ground { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+#scene { will-change: transform; }   /* its own layer: repainting the solid never repaints the wood */
 .hero::after {
   content: ""; position: absolute; inset: 0; pointer-events: none;
   background: linear-gradient(90deg, rgba(233, 200, 145, .78) 0%, rgba(233, 200, 145, .45) 34%, rgba(233, 200, 145, 0) 58%);
@@ -164,20 +165,20 @@ h3 { font-family: var(--display); font-weight: 600; font-size: 1.5rem; line-heig
   background: var(--surface); border: 1px solid var(--rule); border-radius: 18px; box-shadow: var(--shadow);
 }
 .project .cover {
-  position: relative; padding: 44px 40px; background: var(--surface-alt);
-  border-right: 1px solid var(--rule); display: flex; flex-direction: column; justify-content: space-between; min-height: 380px;
+  position: relative; padding: 30px 32px; background: var(--surface-alt);
+  border-right: 1px solid var(--rule); display: flex; flex-direction: column; justify-content: space-between; min-height: 0;
 }
-.project .jp { font-family: var(--jp); font-size: clamp(2.4rem, 5vw, 3.6rem); line-height: 1.15; letter-spacing: .08em; margin: 0; writing-mode: vertical-rl; position: absolute; right: 36px; top: 40px; color: var(--ink); }
+.project .jp { font-family: var(--jp); font-size: clamp(2.2rem, 4.2vw, 3.1rem); line-height: 1.15; letter-spacing: .08em; margin: 0; writing-mode: vertical-rl; position: absolute; right: 30px; top: 28px; color: var(--ink); }
 .project .cover-text { max-width: 70%; }
-.project .cover h3 { font-size: 2rem; line-height: 1.1; margin-bottom: 12px; }
+.project .cover h3 { font-size: 1.8rem; line-height: 1.1; margin-bottom: 10px; }
 .project .cover .by { font-style: italic; color: var(--muted); margin: 0; }
 .tag { display: inline-block; font-family: var(--mono); font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; padding: 5px 10px; border-radius: 999px; border: 1px solid var(--red); color: var(--red); }
-.project .body { padding: 40px; }
-.project .body p { margin: 0 0 1em; font-size: .98rem; }
-.stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px 24px; margin: 26px 0 0; padding: 22px 0 0; border-top: 1px solid var(--rule); }
+.project .body { padding: 28px 32px; }
+.project .body p { margin: 0 0 .8em; font-size: .93rem; line-height: 1.55; }
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px 18px; margin: 18px 0 0; padding: 16px 0 0; border-top: 1px solid var(--rule); }
 .stats div { display: flex; flex-direction: column; }
-.stats b { font-variant-numeric: lining-nums; font-family: var(--display); font-weight: 600; font-size: 2rem; line-height: 1; color: var(--blue); }
-.stats span { font-family: var(--mono); font-size: .7rem; letter-spacing: .08em; color: var(--muted); margin-top: 6px; }
+.stats b { font-variant-numeric: lining-nums; font-family: var(--display); font-weight: 600; font-size: 1.6rem; line-height: 1; color: var(--blue); }
+.stats span { font-family: var(--mono); font-size: .64rem; letter-spacing: .06em; color: var(--muted); margin-top: 5px; line-height: 1.35; }
 .more { margin-top: 28px; color: var(--muted); font-style: italic; }
 
 /* Methods */
@@ -227,6 +228,7 @@ h3 { font-family: var(--display); font-weight: 600; font-size: 1.5rem; line-heig
   .arrow { height: 40px; }
   .arrow svg { transform: rotate(90deg); }
   .project { grid-template-columns: 1fr; }
+  .stats { grid-template-columns: repeat(2, 1fr); }
   .project .cover { border-right: none; border-bottom: 1px solid var(--rule); min-height: 300px; }
   .methods, .conventions, .related { grid-template-columns: 1fr; }
 }

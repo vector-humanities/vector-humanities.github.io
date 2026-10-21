@@ -66,7 +66,7 @@
 
   // ---------------------------------------------------------------- scene
 
-  var W, H, layout, polyG, shadowEl, beams = [], arrows = [], trails = [];
+  var W, H, layout, polyG, beams = [], arrows = [], trails = [];
 
   // points in motion: each runs along one edge's displacement, then takes another edge at the vertex
   var travellers = [];
@@ -122,7 +122,16 @@
       var cx = right + 24 + room / 2;
       layout = { hor: horY, vx: cx, px: cx, py: Math.max(12, horY * 0.07), ps: size, tile: W * 0.075 };
     }
-    var defs = el('defs', {}, svg);
+    // the wood is drawn once into its own layer behind the animation, so its filters never run again
+    var ground = hero.querySelector('#ground');
+    if (!ground) {
+      ground = document.createElementNS(NS, 'svg');
+      ground.id = 'ground'; ground.setAttribute('aria-hidden', 'true'); ground.setAttribute('preserveAspectRatio', 'none');
+      hero.insertBefore(ground, svg);
+    }
+    ground.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+    while (ground.firstChild) ground.removeChild(ground.firstChild);
+    var defs = el('defs', {}, ground);
     [['grainH', '0.0018 0.16', 3], ['grainV', '0.16 0.0018', 8]].forEach(function (g) {
       var f = el('filter', { id: g[0], x: 0, y: 0, width: '100%', height: '100%' }, defs);
       el('feTurbulence', { type: 'fractalNoise', baseFrequency: g[1], numOctaves: 4, seed: g[2] }, f);
@@ -132,33 +141,37 @@
     var soft = el('filter', { id: 'soft' }, defs);
     el('feGaussianBlur', { stdDeviation: 6 }, soft);
 
-    // wall
+    // wall, down to where it meets the floor
     var hor = layout.hor;
-    el('rect', { width: W, height: hor, fill: MAPLE }, svg);
-    el('rect', { width: W, height: hor, fill: MAPLE, filter: 'url(#grainH)', opacity: 0.45 }, svg);
+    el('rect', { width: W, height: hor, fill: MAPLE }, ground);
+    el('rect', { width: W, height: hor, fill: MAPLE, filter: 'url(#grainH)', opacity: 0.45 }, ground);
 
-    // pavement, tiles laid to the vanishing point with the distance-point method
-    el('rect', { y: hor, width: W, height: H - hor, fill: '#b2895c' }, svg);
-    var dist = layout.tile * 3.2, vx = layout.vx, dark = [], light = [];
-    function ty(k) { return hor + (H - hor) * dist / (dist + k * layout.tile); }
-    function xat(xb, y) { return vx + (xb - vx) * (y - hor) / (H - hor); }
-    var n0 = Math.floor(-vx / layout.tile) - 60, n1 = Math.ceil((W - vx) / layout.tile) + 60;
-    for (var k = 0; k < 90; k++) {
+    // a finite pavement of large tiles, laid in perspective from an eye above the floor's far edge;
+    // seven rows run from the front of the picture back to the wall (distance-point construction)
+    var ROWS = 7, t = layout.tile, vx = layout.vx;
+    var eye = hor - 0.9 * (H - hor);                 // eye level, above the line where floor meets wall
+    var dist = 0.9 * ROWS * t;                       // chosen so row ROWS lands exactly on that line
+    function ty(k) { return eye + (H - eye) * dist / (dist + k * t); }
+    function xat(xb, y) { return vx + (xb - vx) * (y - eye) / (H - eye); }
+    var q = (hor - eye) / (H - eye);                 // scale at the back edge: front columns needed to cover it
+    var n0 = Math.floor((vx - vx / q - vx) / t) - 1, n1 = Math.ceil((W - vx) / q / t) + 1;
+    var dark = [], light = [];
+    for (var k = 0; k < ROWS; k++) {
       var ya = ty(k + 1), yb = ty(k);
-      for (var q = n0; q < n1; q++) {
-        var x0 = vx + q * layout.tile, x1 = x0 + layout.tile;
+      for (var c = n0; c < n1; c++) {
+        var x0 = vx + c * t, x1 = x0 + t;
         var pts = [xat(x0, ya), ya, xat(x1, ya), ya, xat(x1, yb), yb, xat(x0, yb), yb].map(function (n) { return n.toFixed(1); });
-        var s = pts[0] + ',' + pts[1] + ' ' + pts[2] + ',' + pts[3] + ' ' + pts[4] + ',' + pts[5] + ' ' + pts[6] + ',' + pts[7];
-        ((q + k) % 2 === 0 ? dark : light).push(s);
+        ((c + k) % 2 === 0 ? dark : light).push(pts[0] + ',' + pts[1] + ' ' + pts[2] + ',' + pts[3] + ' ' + pts[4] + ',' + pts[5] + ' ' + pts[6] + ',' + pts[7]);
       }
     }
     [[dark, WALNUT, 'grainV'], [light, MAPLE, 'grainH']].forEach(function (set) {
-      var g1 = el('g', { fill: set[1] }, svg), g2 = el('g', { fill: set[1], filter: 'url(#' + set[2] + ')', opacity: 0.9 }, svg);
+      var g1 = el('g', { fill: set[1] }, ground), g2 = el('g', { fill: set[1], filter: 'url(#' + set[2] + ')', opacity: 0.9 }, ground);
       set[0].forEach(function (s) { el('polygon', { points: s }, g1); el('polygon', { points: s }, g2); });
     });
+    el('path', { d: 'M0,' + hor.toFixed(1) + ' H' + W, stroke: STRING, 'stroke-width': 1, opacity: 0.45 }, ground);
+    el('ellipse', { cx: layout.px, cy: ty(ROWS * 0.45), rx: layout.ps * 0.34, ry: layout.ps * 0.05,
+                    fill: STRING, opacity: 0.4, filter: 'url(#soft)' }, ground);
 
-    shadowEl = el('ellipse', { cx: layout.px, cy: hor + (H - hor) * 0.5, rx: layout.ps * 0.34, ry: layout.ps * 0.05,
-                               fill: STRING, opacity: 0.4, filter: 'url(#soft)' }, svg);
     polyG = el('g', {}, svg);
     beams = edges.map(function () { return el('path', { 'stroke-linecap': 'round' }, polyG); });
     trails = travellers.map(function () {

@@ -20,16 +20,18 @@ def defs():
             '<feColorMatrix values="0 0 0 0 0.24  0 0 0 0 0.13  0 0 0 0 0.05  0 0 0 0.38 -0.10"/>'
             '<feComposite in2="SourceGraphic" operator="in"/></filter>')
 
-def pavement(w, h, hor, vx, tile, rows=90, extra=60):
-    """Checkered floor below the horizon. tile is the width of a tile on the front edge."""
-    dist = tile * 3.2
-    base = h
+def pavement(w, h, hor, vx, tile, rows=7):
+    """A finite pavement of large tiles from the front of the picture back to the wall at y = hor,
+    laid in perspective from an eye above that line (distance-point construction)."""
+    eye = hor - 0.9 * (h - hor)
+    dist = 0.9 * rows * tile                     # puts row `rows` exactly on the wall line
     def ty(k):
-        return hor + (base - hor) * dist / (dist + k * tile * 1.0)
+        return eye + (h - eye) * dist / (dist + k * tile)
     def xat(xb, y):
-        return vx + (xb - vx) * (y - hor) / (base - hor)
+        return vx + (xb - vx) * (y - eye) / (h - eye)
+    q = (hor - eye) / (h - eye)
+    n0 = int(-vx / q / tile) - 2; n1 = int((w - vx) / q / tile) + 2
     a, b = [], []
-    n0 = int(-(vx / tile) - extra); n1 = int((w - vx) / tile + extra)
     for k in range(rows):
         ya, yb = ty(k + 1), ty(k)
         for i in range(n0, n1):
@@ -37,9 +39,9 @@ def pavement(w, h, hor, vx, tile, rows=90, extra=60):
             poly_ = [(xat(xa0, ya), ya), (xat(xa1, ya), ya), (xat(xa1, yb), yb), (xat(xa0, yb), yb)]
             pts = ' '.join(f'{x:.1f},{y:.1f}' for x, y in poly_)
             (a if (i + k) % 2 == 0 else b).append(f'<polygon points="{pts}"/>')
-    base_fill = f'<rect y="{hor:.1f}" width="{w}" height="{h - hor:.1f}" fill="#b2895c"/>'
-    return (base_fill + f'<g fill="{WALNUT}">{"".join(a)}</g><g fill="{WALNUT}" filter="url(#grainV)" opacity=".9">{"".join(a)}</g>'
-            f'<g fill="{MAPLE}">{"".join(b)}</g><g fill="{MAPLE}" filter="url(#grainH)" opacity=".9">{"".join(b)}</g>')
+    return (f'<g fill="{WALNUT}">{"".join(a)}</g><g fill="{WALNUT}" filter="url(#grainV)" opacity=".9">{"".join(a)}</g>'
+            f'<g fill="{MAPLE}">{"".join(b)}</g><g fill="{MAPLE}" filter="url(#grainH)" opacity=".9">{"".join(b)}</g>'
+            f'<path d="M0,{hor:.1f} H{w}" stroke="{STRING}" stroke-width="1" opacity=".45"/>'), ty(rows * 0.45)
 
 def wall(w, hor):
     return (f'<rect width="{w}" height="{hor}" fill="{MAPLE}"/>'
@@ -64,25 +66,26 @@ def hung_polyhedron(cx, top_y, size, palette, thread_from=0):
 
 WOOD_MARK = dict(beam='#1a1aff', hole='#f6f2e9', thread=STRING, accent='#ff4a24')
 
-def scene(w, h, hor_frac=0.62, vx_frac=0.72, poly_frac=(0.72, 0.10, 0.62), tile_frac=0.11, shadow=True, shadow_frac=0.55):
+def scene(w, h, hor_frac=0.62, vx_frac=0.72, poly_frac=(0.72, 0.10, 0.62), tile_frac=0.11, shadow=True, shadow_frac=0.55, solid=True):
     hor = h * hor_frac
     vx = w * vx_frac
     px, py, ps = w * poly_frac[0], h * poly_frac[1], h * poly_frac[2]
-    pm, P = hung_polyhedron(px, py, ps, WOOD_MARK)
+    pm, P = hung_polyhedron(px, py, ps, WOOD_MARK) if solid else ('', [])
+    floor, shadow_y = pavement(w, h, hor, vx, w * tile_frac)
     ys = [p[1] for p in P]
     sh = ''
-    if shadow:
+    if shadow and solid:
         # a soft shadow on the floor under the hung solid
-        sy = hor + (h - hor) * shadow_frac
+        sy = shadow_y
         sh = (f'<ellipse cx="{px:.1f}" cy="{sy:.1f}" rx="{ps * 0.34:.1f}" ry="{ps * 0.05:.1f}" fill="{STRING}" opacity=".45" filter="url(#soft)"/>')
     d = defs() + '<filter id="soft"><feGaussianBlur stdDeviation="6"/></filter>'
-    return (f'<defs>{d}</defs>{wall(w, hor)}<g>{pavement(w, h, hor, vx, w * tile_frac)}</g>{sh}'
+    return (f'<defs>{d}</defs>{wall(w, hor)}<g>{floor}</g>{sh}'
             f'{pm}')
 
 if __name__ == '__main__':
     W, H = 1280, 360
     banner = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}">'
-              + scene(W, H, hor_frac=0.76, vx_frac=0.79, poly_frac=(0.79, 0.04, 0.64), tile_frac=0.07, shadow_frac=0.55) + '</svg>')
+              + scene(W, H, hor_frac=0.76, vx_frac=0.79, poly_frac=(0.79, 0.04, 0.64), tile_frac=0.07, shadow_frac=0.55, solid=False) + '</svg>')
     html = ('<!doctype html><meta charset="utf-8"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Source+Serif+4:ital,opsz@1,8..60&family=IBM+Plex+Mono&display=swap">'
             '<style>body{margin:0}.b{position:relative;width:1280px;height:360px;overflow:hidden}'
             '.t{position:absolute;left:72px;top:44px;color:#141518}'

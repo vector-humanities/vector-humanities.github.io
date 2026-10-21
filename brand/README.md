@@ -1,6 +1,6 @@
 # Vector Humanities brand kit
 
-The mark is the rhombicuboctahedron from Luca Pacioli's *De divina proportione* (1509), drawn by Leonardo, here as a wireframe: visible edges bold, hidden edges thin and pale. It stands on a square face, turned 23° and seen 21° from above (a canonical three-quarter view, with no face within 8° of edge-on). The banner, social card and site hero set it hovering over an intarsia pavement in perspective, after the inlaid-wood panels of Fra Giovanni da Verona. On the site it turns slowly, can be spun by dragging, and five faint white points travel along its edges; spun hard, the points are thrown off, fall and return.
+The mark is the rhombicuboctahedron from Luca Pacioli's *De divina proportione* (1509), drawn by Leonardo, here as a wireframe: visible edges bold, hidden edges thin and pale. It stands on a square face, turned 23° and seen 21° from above (a canonical three-quarter view, with no face within 8° of edge-on). The social card and site hero set it hovering over an intarsia pavement in perspective (the README banner shows the pavement alone), after the inlaid-wood panels of Fra Giovanni da Verona. On the site it turns slowly, can be spun by dragging, and five faint white points travel along its edges; spun hard, the points are thrown off, fall and return.
 
 | File | Use |
 |:--|:--|
