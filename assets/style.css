@@ -162,7 +162,7 @@ h3 { font-family: var(--display); font-weight: 600; font-size: 1.5rem; line-heig
 .project .cover .by { font-style: italic; color: var(--muted); margin: 0; }
 .project + .project { margin-top: 24px; }
 /* a figure from the book printed into the cover's paper, the title set over it */
-.project .cover .figure { position: absolute; left: 15%; top: 11%; width: 64%; max-width: 330px; height: auto; mix-blend-mode: multiply; opacity: .78; pointer-events: none; }
+.project .cover .figure { position: absolute; left: 15%; top: 15%; width: 64%; max-width: 330px; height: auto; mix-blend-mode: multiply; opacity: .78; pointer-events: none; }
 .project .cover .jp, .project .cover .cover-text { z-index: 1; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .project .cover .figure { filter: invert(1); mix-blend-mode: screen; opacity: .55; } }
 :root[data-theme="dark"] .project .cover .figure { filter: invert(1); mix-blend-mode: screen; opacity: .55; }
