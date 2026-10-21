@@ -146,30 +146,14 @@
     el('rect', { width: W, height: hor, fill: MAPLE }, ground);
     el('rect', { width: W, height: hor, fill: MAPLE, filter: 'url(#grainH)', opacity: 0.45 }, ground);
 
-    // a finite pavement of large tiles, laid in perspective from an eye above the floor's far edge;
-    // seven rows run from the front of the picture back to the wall (distance-point construction)
-    var ROWS = 7, t = layout.tile, vx = layout.vx;
-    var eye = hor - 0.9 * (H - hor);                 // eye level, above the line where floor meets wall
-    var dist = 0.9 * ROWS * t;                       // chosen so row ROWS lands exactly on that line
-    function ty(k) { return eye + (H - eye) * dist / (dist + k * t); }
-    function xat(xb, y) { return vx + (xb - vx) * (y - eye) / (H - eye); }
-    var q = (hor - eye) / (H - eye);                 // scale at the back edge: front columns needed to cover it
-    var n0 = Math.floor((vx - vx / q - vx) / t) - 1, n1 = Math.ceil((W - vx) / q / t) + 1;
-    var dark = [], light = [];
-    for (var k = 0; k < ROWS; k++) {
-      var ya = ty(k + 1), yb = ty(k);
-      for (var c = n0; c < n1; c++) {
-        var x0 = vx + c * t, x1 = x0 + t;
-        var pts = [xat(x0, ya), ya, xat(x1, ya), ya, xat(x1, yb), yb, xat(x0, yb), yb].map(function (n) { return n.toFixed(1); });
-        ((c + k) % 2 === 0 ? dark : light).push(pts[0] + ',' + pts[1] + ' ' + pts[2] + ',' + pts[3] + ' ' + pts[4] + ',' + pts[5] + ' ' + pts[6] + ',' + pts[7]);
-      }
-    }
-    [[dark, WALNUT, 'grainV'], [light, MAPLE, 'grainH']].forEach(function (set) {
-      var g1 = el('g', { fill: set[1] }, ground), g2 = el('g', { fill: set[1], filter: 'url(#' + set[2] + ')', opacity: 0.9 }, ground);
-      set[0].forEach(function (s) { el('polygon', { points: s }, g1); el('polygon', { points: s }, g2); });
-    });
-    el('path', { d: 'M0,' + hor.toFixed(1) + ' H' + W, stroke: STRING, 'stroke-width': 1, opacity: 0.45 }, ground);
-    el('ellipse', { cx: layout.px, cy: ty(ROWS * 0.45), rx: layout.ps * 0.34, ry: layout.ps * 0.05,
+    // the floor: the endless checkered pavement, rendered once to an image (assets/floor.jpg, 6000 x 400,
+    // vanishing point at its centre), scaled to the floor's height and slid so its vanishing point sits at vx
+    // widths follow the original tile rule (a tile per layout.tile at the front), heights the floor's depth
+    var vx = layout.vx, fh = H - hor, sx = layout.tile / 200;
+    el('rect', { y: hor, width: W, height: fh, fill: '#b2895c' }, ground);
+    el('image', { href: 'assets/floor.jpg', x: (vx - 3000 * sx).toFixed(1), y: hor.toFixed(1),
+                  width: (6000 * sx).toFixed(1), height: fh.toFixed(1), preserveAspectRatio: 'none' }, ground);
+    el('ellipse', { cx: layout.px, cy: hor + fh * 0.5, rx: layout.ps * 0.34, ry: layout.ps * 0.05,
                     fill: STRING, opacity: 0.4, filter: 'url(#soft)' }, ground);
 
     polyG = el('g', {}, svg);

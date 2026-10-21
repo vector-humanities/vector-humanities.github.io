@@ -20,18 +20,16 @@ def defs():
             '<feColorMatrix values="0 0 0 0 0.24  0 0 0 0 0.13  0 0 0 0 0.05  0 0 0 0.38 -0.10"/>'
             '<feComposite in2="SourceGraphic" operator="in"/></filter>')
 
-def pavement(w, h, hor, vx, tile, rows=7):
-    """A finite pavement of large tiles from the front of the picture back to the wall at y = hor,
-    laid in perspective from an eye above that line (distance-point construction)."""
-    eye = hor - 0.9 * (h - hor)
-    dist = 0.9 * rows * tile                     # puts row `rows` exactly on the wall line
+def pavement(w, h, hor, vx, tile, rows=90, extra=60):
+    """The endless checkered floor below the horizon at y = hor. tile is a tile's width on the front edge."""
+    dist = tile * 3.2
+    base = h
     def ty(k):
-        return eye + (h - eye) * dist / (dist + k * tile)
+        return hor + (base - hor) * dist / (dist + k * tile * 1.0)
     def xat(xb, y):
-        return vx + (xb - vx) * (y - eye) / (h - eye)
-    q = (hor - eye) / (h - eye)
-    n0 = int(-vx / q / tile) - 2; n1 = int((w - vx) / q / tile) + 2
+        return vx + (xb - vx) * (y - hor) / (base - hor)
     a, b = [], []
+    n0 = int(-(vx / tile) - extra); n1 = int((w - vx) / tile + extra)
     for k in range(rows):
         ya, yb = ty(k + 1), ty(k)
         for i in range(n0, n1):
@@ -39,9 +37,11 @@ def pavement(w, h, hor, vx, tile, rows=7):
             poly_ = [(xat(xa0, ya), ya), (xat(xa1, ya), ya), (xat(xa1, yb), yb), (xat(xa0, yb), yb)]
             pts = ' '.join(f'{x:.1f},{y:.1f}' for x, y in poly_)
             (a if (i + k) % 2 == 0 else b).append(f'<polygon points="{pts}"/>')
-    return (f'<g fill="{WALNUT}">{"".join(a)}</g><g fill="{WALNUT}" filter="url(#grainV)" opacity=".9">{"".join(a)}</g>'
-            f'<g fill="{MAPLE}">{"".join(b)}</g><g fill="{MAPLE}" filter="url(#grainH)" opacity=".9">{"".join(b)}</g>'
-            f'<path d="M0,{hor:.1f} H{w}" stroke="{STRING}" stroke-width="1" opacity=".45"/>'), ty(rows * 0.45)
+    base_fill = f'<rect y="{hor:.1f}" width="{w}" height="{h - hor:.1f}" fill="#b2895c"/>'
+    return (base_fill + f'<g fill="{WALNUT}">{"".join(a)}</g><g fill="{WALNUT}" filter="url(#grainV)" opacity=".9">{"".join(a)}</g>'
+            f'<g fill="{MAPLE}">{"".join(b)}</g><g fill="{MAPLE}" filter="url(#grainH)" opacity=".9">{"".join(b)}</g>'), hor + (h - hor) * shadow_at
+
+shadow_at = 0.55
 
 def wall(w, hor):
     return (f'<rect width="{w}" height="{hor}" fill="{MAPLE}"/>'
