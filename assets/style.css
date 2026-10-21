@@ -161,8 +161,18 @@ h3 { font-family: var(--display); font-weight: 600; font-size: 1.5rem; line-heig
 .project .cover h3 { font-size: 1.8rem; line-height: 1.1; margin-bottom: 10px; }
 .project .cover .by { font-style: italic; color: var(--muted); margin: 0; }
 .project + .project { margin-top: 24px; }
-.project .plate { position: absolute; right: 28px; top: 26px; width: 132px; height: 132px; border-radius: 10px; overflow: hidden; box-shadow: 0 0 0 1px var(--rule); }
-.project .plate img { display: block; width: 100%; height: 100%; }
+.project .mark { position: absolute; right: 18px; top: 10px; width: 190px; height: 190px; }
+.project .mark img { display: block; width: 100%; height: 100%; }
+/* a photograph filling the cover, darkened at the foot so the title reads */
+.project .cover.photo { background-size: cover; background-position: 58% 45%; color: #fff; border-right-color: transparent; }
+.project .cover.photo::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(4, 6, 11, .15) 0%, rgba(4, 6, 11, .05) 40%, rgba(4, 6, 11, .82) 100%); }
+.project .cover.photo > * { position: relative; }
+.project .cover.photo .cover-link { position: absolute; inset: 0; z-index: 1; }
+.project .cover.photo h3 { color: #fff; }
+.project .cover.photo .by { color: rgba(255, 255, 255, .82); }
+.project .cover.photo .tag { color: #fff; border-color: rgba(255, 255, 255, .7); background: rgba(4, 6, 11, .35); }
+.project .cover.photo .credit { position: absolute; right: 14px; bottom: 10px; margin: 0; z-index: 2; font-family: var(--mono); font-size: .6rem; letter-spacing: .04em; color: rgba(255, 255, 255, .6); }
+.project .cover.photo .credit a { color: rgba(255, 255, 255, .75); text-decoration-color: rgba(255, 255, 255, .35); }
 .on-dark { display: none !important; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .on-light { display: none !important; } :root:not([data-theme="light"]) .on-dark { display: block !important; } }
 :root[data-theme="dark"] .on-light { display: none !important; }
@@ -239,6 +249,7 @@ h3 { font-family: var(--display); font-weight: 600; font-size: 1.5rem; line-heig
   section { padding: 72px 0; }
   .project .cover, .project .body { padding: 28px 22px; }
   .project .jp { right: 20px; top: 26px; }
-  .project .plate { right: 20px; top: 22px; width: 96px; height: 96px; }
+  .project .mark { right: 10px; top: 8px; width: 130px; height: 130px; }
+  .project .cover.photo { min-height: 300px; }
   .method { padding: 22px; }
 }
