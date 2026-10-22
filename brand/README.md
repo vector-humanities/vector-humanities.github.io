@@ -7,11 +7,13 @@ The mark is the rhombicuboctahedron from Luca Pacioli's *De divina proportione* 
 | `mark-full-*.svg` | 80 px and up: every edge, hidden edges thin and pale |
 | `mark-front-*.svg` | 28 to 80 px: visible edges only (those bordering a face turned to the viewer) |
 | `mark-icon-*.svg` | 16 to 28 px: visible edges only, heavier strokes |
+| `mark-mono.svg`, `mark-mono-1024.png` | black on white, for book imprint pages (visible edges #000000, hidden #8c8c8c) |
+| `mark-*-mono.svg` | the three detail levels in black on white |
 | `favicon.svg` | icon level, follows the browser's light or dark scheme |
 | `avatar-1024.png` | organisation avatar |
 | `banner-2560x720.png` | README banner |
 | `social-card-1200x630.png` | link previews |
 
-Grounds: `paper` (#f6f2e9, beams #1a1aff), `night` (#0c0e1c, beams #8a90ff), `electric` (#1a1aff, beams white). Vermilion #ff4a24. Wood: maple #e9c891, walnut #7a4a26. Type: Cormorant Garamond 600 caps, tracked, for the wordmark; Source Serif 4 and IBM Plex Mono for text.
+Grounds: `paper` (#f6f2e9, beams #1a1aff), `night` (#0c0e1c, beams #8a90ff), `electric` (#1a1aff, beams white), `mono` (#ffffff, beams #000000, for print). Vermilion #ff4a24. Wood: maple #e9c891, walnut #7a4a26. Type: Cormorant Garamond 600 caps, tracked, for the wordmark; Source Serif 4 and IBM Plex Mono for text.
 
 `src/` holds the generators: `poly.py` (the mark), `intarsia.py` (banner and card), `export.py` (writes the files above).

@@ -6,7 +6,7 @@ import poly as p
 P = p.PALETTES
 def write(path, txt):
     open(path, 'w').write(txt)
-for name in ('paper', 'night', 'electric'):
+for name in ('paper', 'night', 'electric', 'mono'):
     for lv in ('full', 'front', 'icon'):
         write(f'{BR}/mark-{lv}-{name}.svg', p.mark_svg(P[name], 400, lv, bg=True))
 icon = p.body(P['paper'], 'icon', 32)
@@ -21,4 +21,9 @@ av = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="102
       f'<rect width="100" height="100" fill="{P["paper"]["bg"]}"/>'
       + p.body(P['paper'], 'full', 1024, box=(14.0, 14.0, 86.0, 86.0), weight=1.4) + '</svg>')
 write(f'{BR}/avatar.svg', av)
+# black on white, for book imprint pages: the avatar's drawing in the mono palette
+mono = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="1024" height="1024">'
+        f'<rect width="100" height="100" fill="{P["mono"]["bg"]}"/>'
+        + p.body(P['mono'], 'full', 1024, box=(14.0, 14.0, 86.0, 86.0), weight=1.4) + '</svg>')
+write(f'{BR}/mark-mono.svg', mono)
 print('ok')

@@ -108,6 +108,7 @@ PALETTES = {
     'night':    dict(bg='#0c0e1c', beam='#8a90ff', thread='#c9c7d6', accent='#ff6a45'),
     'ink':      dict(bg='#141518', beam='#f6f2e9', thread='#f6f2e9', accent='#ff4a24'),
     'wood':     dict(bg='#e7c48e', beam='#1a1aff', thread='#3b2412', accent='#ff4a24'),
+    'mono':     dict(bg='#ffffff', beam='#000000', thread='#000000', accent='#000000'),   # print: imprint pages
 }
 
 def level_for(px):
