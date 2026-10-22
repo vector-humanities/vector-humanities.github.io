@@ -263,3 +263,13 @@ h3 { font-family: var(--display); font-weight: 600; font-size: 1.5rem; line-heig
   .method { padding: 22px; }
   .method .shot-img { margin: 0 -22px 16px; }
 }
+
+/* Notes */
+
+.fnref { font-size: .7em; line-height: 0; margin-left: 1px; }
+.fnref a { text-decoration: none; font-family: var(--mono); }
+.footnotes { margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--rule); max-width: 40rem; }
+.footnotes p { font-size: .86rem; line-height: 1.6; color: var(--muted); margin: 0; }
+.fn-num { font-family: var(--mono); font-size: .75rem; color: var(--sand); margin-right: .4rem; }
+.fn-back { text-decoration: none; margin-left: .2rem; }
+:target { scroll-margin-top: 90px; }
