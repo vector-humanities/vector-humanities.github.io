@@ -105,9 +105,16 @@
     /* Statement */
     .statement { padding: 0 0 88px; }
     .statement p { margin: 0 0 1em; text-align: justify; hyphens: auto; -webkit-hyphens: auto; }
+    /* drop cap: three lines deep, its top on the first line's cap height, its foot on the third baseline */
     .statement p:first-child::first-letter {
-      float: left; font-family: var(--display); font-weight: 500; color: var(--rubric);
-      font-size: 5.1em; line-height: .8; padding: .07em .1em 0 0; margin-bottom: -.1em;
+      font-family: var(--display); font-weight: 500; color: var(--rubric);
+      -webkit-initial-letter: 3; initial-letter: 3; margin-right: .14em;
+      font-variant-caps: normal; letter-spacing: 0;   /* not the small caps of the first line */
+    }
+    @supports not ((initial-letter: 3) or (-webkit-initial-letter: 3)) {
+      .statement p:first-child::first-letter {
+        float: left; font-size: 4.45em; line-height: .78; padding: .1em .1em 0 0; margin-bottom: -.06em;
+      }
     }
     .statement p:first-child::first-line { font-variant-caps: all-small-caps; letter-spacing: .06em; }
 
