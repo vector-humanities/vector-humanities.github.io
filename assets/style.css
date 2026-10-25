@@ -274,3 +274,6 @@ h3 { font-family: var(--display); font-weight: 600; font-size: 1.5rem; line-heig
 .fn-num { font-family: var(--mono); font-size: .75rem; color: var(--sand); margin-right: .4rem; }
 .fn-back { text-decoration: none; margin-left: .2rem; }
 :target { scroll-margin-top: 90px; }
+.project .cover.lab { background-size: cover; background-position: center; }
+.project .cover.lab::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, color-mix(in srgb, var(--surface-alt) 10%, transparent) 0%, color-mix(in srgb, var(--surface-alt) 30%, transparent) 45%, color-mix(in srgb, var(--surface-alt) 92%, transparent) 100%); }
+.project .cover.lab > * { position: relative; }
