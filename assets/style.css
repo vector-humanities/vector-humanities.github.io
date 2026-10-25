@@ -167,6 +167,7 @@ h3 { font-family: var(--display); font-weight: 600; font-size: 1.5rem; line-heig
 .project .cover.photo { background-size: cover; background-position: 58% 45%; color: #fff; border-right-color: transparent; }
 .project .cover.photo::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(4, 6, 11, .15) 0%, rgba(4, 6, 11, .05) 40%, rgba(4, 6, 11, .82) 100%); }
 .project .cover.photo > * { position: relative; }
+.project .cover.photo.dense::before { background: linear-gradient(180deg, rgba(4, 6, 11, .35) 0%, rgba(4, 6, 11, .45) 30%, rgba(4, 6, 11, .9) 58%, rgba(4, 6, 11, .94) 100%); }
 .project .cover.photo .cover-link, .project .cover .cover-link { position: absolute; inset: 0; z-index: 2; }
 .project .cover.photo h3 { color: #fff; }
 .project .cover.photo .by { color: rgba(255, 255, 255, .82); }
