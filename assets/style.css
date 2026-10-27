@@ -10,6 +10,8 @@
   --blue-hover: #1010c0;
   --sand: #8a5a2f;
   --red: #e8452a;
+  --red-text: #b8341c;   /* the red darkened for small type: 4.8:1 or better on every light surface */
+  --on-blue: #fff;
   --rule: #e2d9c8;
   --shadow: 0 1px 2px rgba(20, 21, 24, .04), 0 8px 28px rgba(20, 21, 24, .06);
   --serif: "Source Serif 4", Georgia, "Iowan Old Style", serif;
@@ -30,6 +32,8 @@
     --blue-hover: #aeb2ff;
     --sand: #d2a26c;
     --red: #ff6a45;
+    --red-text: #ff6a45;
+    --on-blue: #0c0e1c;
     --rule: #262b48;
     --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 10px 30px rgba(0, 0, 0, .35);
     color-scheme: dark;
@@ -46,6 +50,8 @@
   --blue-hover: #aeb2ff;
   --sand: #d2a26c;
   --red: #ff6a45;
+  --red-text: #ff6a45;
+  --on-blue: #0c0e1c;
   --rule: #262b48;
   --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 10px 30px rgba(0, 0, 0, .35);
   color-scheme: dark;
@@ -125,8 +131,8 @@ a:hover { color: var(--blue-hover); text-decoration-color: currentColor; }
   border: 1px solid var(--ink); color: var(--ink); background: transparent; transition: all .2s ease;
 }
 .btn:hover { background: var(--ink); color: var(--bg); }
-.btn.primary { background: var(--blue); border-color: var(--blue); color: #fff; }
-.btn.primary:hover { background: var(--blue-hover); border-color: var(--blue-hover); color: #fff; }
+.btn.primary { background: var(--blue); border-color: var(--blue); color: var(--on-blue); }
+.btn.primary:hover { background: var(--blue-hover); border-color: var(--blue-hover); color: var(--on-blue); }
 .hero .btn { border-color: var(--h-ink); color: var(--h-ink); }
 .hero .btn:hover { background: var(--h-ink); color: #e9c891; }
 .hero .btn.primary { background: var(--h-blue); border-color: var(--h-blue); color: #fff; }
@@ -176,12 +182,12 @@ h3 { font-family: var(--display); font-weight: 600; font-size: 1.5rem; line-heig
 .project .cover.photo.paper::before { background: linear-gradient(180deg, rgba(243, 236, 222, 0) 38%, rgba(243, 236, 222, .9) 78%, rgba(243, 236, 222, .97) 100%); }
 .project .cover.photo.paper h3 { color: #1c1712; }
 .project .cover.photo.paper .by { color: #4a3f33; }
-.project .cover.photo.paper .tag { color: var(--red); border-color: var(--red); background: rgba(243, 236, 222, .85); }
+.project .cover.photo.paper .tag { color: var(--red-text); border-color: var(--red-text); background: rgba(243, 236, 222, .85); }
 .on-dark { display: none !important; }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .on-light { display: none !important; } :root:not([data-theme="light"]) .on-dark { display: block !important; } }
 :root[data-theme="dark"] .on-light { display: none !important; }
 :root[data-theme="dark"] .on-dark { display: block !important; }
-.tag { display: inline-block; font-family: var(--mono); font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; padding: 5px 10px; border-radius: 999px; border: 1px solid var(--red); color: var(--red); }
+.tag { display: inline-block; font-family: var(--mono); font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; padding: 5px 10px; border-radius: 999px; border: 1px solid var(--red-text); color: var(--red-text); }
 .project .body { padding: 28px 32px; }
 .project .body p { margin: 0 0 .8em; font-size: .93rem; line-height: 1.55; }
 .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px 18px; margin: 18px 0 0; padding: 16px 0 0; border-top: 1px solid var(--rule); }
@@ -278,3 +284,10 @@ h3 { font-family: var(--display); font-weight: 600; font-size: 1.5rem; line-heig
 .project .cover.lab::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, color-mix(in srgb, var(--surface-alt) 10%, transparent) 0%, color-mix(in srgb, var(--surface-alt) 30%, transparent) 45%, color-mix(in srgb, var(--surface-alt) 92%, transparent) 100%); }
 .project .cover.lab > * { position: relative; }
 .project .cover.lab .tag { background: var(--surface-alt); }
+
+/* Keyboard focus: a blue ring with a gap of page colour, so it shows on paper, night and the wood */
+:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; box-shadow: 0 0 0 4px var(--bg); border-radius: 3px; }
+.hero :focus-visible { outline-color: var(--h-blue); box-shadow: 0 0 0 4px #e9c891; }
+.cover-link:focus-visible, .shot-img:focus-visible { outline: 3px solid var(--blue); outline-offset: -3px; box-shadow: none; }
+.project .cover.photo:not(.paper) .cover-link:focus-visible { outline-color: #fff; }
+.related a:focus-visible { border-color: var(--blue); }
