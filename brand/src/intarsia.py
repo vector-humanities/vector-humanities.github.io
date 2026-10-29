@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
 """Intarsia scene: maple wall, walnut and maple pavement in perspective, the polyhedron hung in front.
 
 scene(w, h, ...) returns SVG markup in a w x h box. Grain comes from stretched turbulence,

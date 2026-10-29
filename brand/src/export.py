@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
 """Export the Vector Humanities identity: marks, favicon, avatar, header and page marks."""
 import sys
 S, SITE, BR = sys.argv[1:4]

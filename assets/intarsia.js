@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
 // Hero: an intarsia scene. A maple wall and a walnut-and-maple pavement in perspective, built to the
 // hero's size, with the rhombicuboctahedron from Pacioli's De divina proportione hovering in front, turning slowly.
 (function () {

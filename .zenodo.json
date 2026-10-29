@@ -1,0 +1,45 @@
+{
+  "title": "Vector Humanities: humanities research in and on the vector medium",
+  "upload_type": "other",
+  "description": "<p>The website of Vector Humanities, a research lab directed by David M. Berry at the University of Sussex. It documents projects that take the vector medium as both the instrument and the object of humanities research: the Vector Lab instruments, the vector translation of Kuki Shūzō's The Problem of Contingency, the Vector Humanities Editions &amp; Contingencies book series, the Melville Research Bench, critical code studies readings of ELIZA, Spacewar! and SHRDLU, and Nostos as a case of vector literature. It also sets out vector toolmaking and the lab's working conventions on provenance, AI disclosure, instrument and material, and open access. Text and images are licensed CC BY 4.0, except third-party images, which keep their own licences; the code (the hero script and the brand generators) is licensed GPL-3.0-or-later.</p>",
+  "creators": [
+    {
+      "name": "Berry, David M.",
+      "affiliation": "University of Sussex",
+      "orcid": "0000-0002-7737-5586"
+    }
+  ],
+  "license": "cc-by-4.0",
+  "keywords": [
+    "vector humanities",
+    "vector medium",
+    "vector theory",
+    "vector toolmaking",
+    "digital humanities",
+    "critical code studies",
+    "AI",
+    "translation"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://vector-humanities.github.io/",
+      "relation": "isDocumentedBy",
+      "resource_type": "other"
+    },
+    {
+      "identifier": "10.5281/zenodo.23715274",
+      "relation": "references",
+      "resource_type": "software"
+    },
+    {
+      "identifier": "10.5281/zenodo.23736367",
+      "relation": "references",
+      "resource_type": "software"
+    },
+    {
+      "identifier": "10.5281/zenodo.23715253",
+      "relation": "references",
+      "resource_type": "software"
+    }
+  ]
+}

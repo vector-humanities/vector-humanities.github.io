@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
 """Vector Humanities mark: the rhombicuboctahedron from Pacioli's De divina proportione, as a wireframe.
 
 Two poses. 'stand': resting on a square face, turned 23 degrees and seen 21 degrees from above, the

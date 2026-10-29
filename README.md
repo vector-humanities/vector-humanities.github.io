@@ -7,3 +7,11 @@ Static HTML, CSS and JavaScript with no build step. `index.html` is the page; `a
 ```bash
 python3 -m http.server 8842
 ```
+
+## Licence
+
+The site's text and images are licensed under [CC BY 4.0](LICENSE), except third-party images, which keep their own licences as recorded in the HTML comment beside each one. The code (`assets/intarsia.js` and the generators in `brand/src/`) is licensed under the [GNU GPL, version 3 or later](COPYING).
+
+## Citation
+
+Citation metadata is in [`CITATION.cff`](CITATION.cff). Each release is archived on Zenodo with its own DOI.
