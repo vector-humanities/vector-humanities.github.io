@@ -1,5 +1,7 @@
 # vector-humanities.github.io
 
+[![DOI](https://zenodo.org/badge/1428713802.svg)](https://doi.org/10.5281/zenodo.23764808)
+
 Landing page for [Vector Humanities](https://github.com/vector-humanities), served by GitHub Pages at <https://vector-humanities.github.io>.
 
 Static HTML, CSS and JavaScript with no build step. `index.html` is the page; `assets/intarsia.js` builds the hero, an intarsia scene with the rhombicuboctahedron turning on its thread; `assets/style.css` holds the light and dark themes. `brand/` holds the mark, favicon, avatar, banner and social card, with the Python generators in `brand/src/`. To preview locally:
@@ -14,4 +16,4 @@ The site's text and images are licensed under [CC BY 4.0](LICENSE), except third
 
 ## Citation
 
-Citation metadata is in [`CITATION.cff`](CITATION.cff). Each release is archived on Zenodo with its own DOI.
+Citation metadata is in [`CITATION.cff`](CITATION.cff). Each release is archived on Zenodo with its own DOI; [10.5281/zenodo.23764808](https://doi.org/10.5281/zenodo.23764808) always resolves to the latest.

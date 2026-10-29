@@ -23,6 +23,7 @@ license:
   - CC-BY-4.0
   - GPL-3.0-or-later
 version: "1.0.0"
+doi: "10.5281/zenodo.23764808"
 date-released: "2026-10-29"
 keywords:
   - vector humanities
