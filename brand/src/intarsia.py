@@ -94,7 +94,7 @@ if __name__ == '__main__':
             '.w{font:600 62px/1 "Cormorant Garamond",serif;letter-spacing:.14em}'
             '.s{font:italic 22px "Source Serif 4",serif;color:#3b2412;margin-top:14px}</style>'
             f'<div class="b">{banner}<div class="t"><div class="k">GITHUB.COM/VECTOR-HUMANITIES</div>'
-            '<div class="w">VECTOR<br>HUMANITIES</div><div class="s">Humanities research in the vector medium</div></div></div>')
+            '<div class="w">VECTOR<br>HUMANITIES</div><div class="s">Humanities research in and on the vector medium</div></div></div>')
     open(f'{S}/banner.html', 'w').write(html)
     W2, H2 = 1200, 630
     card = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W2} {H2}" width="{W2}" height="{H2}">'
